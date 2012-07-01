@@ -45,6 +45,7 @@ public class ControllerTestCaseGenerator implements Generator {
 
         TEST.printImport(p);
         p.println("import static %s.*;", ClassConstants.Assert);
+        p.println("import static %s.*;", ClassConstants.CoreMatchers);
         p.println();
         GeneratedUtil.printGeneratedAnnotation(this, p);
         p.print("public class %s%s", controllerDesc.getSimpleName(),
@@ -60,7 +61,7 @@ public class ControllerTestCaseGenerator implements Generator {
                 p.indent();
                 p.println("%1$s controller = new %1$s();",
                         controllerDesc.getSimpleName());
-                p.println("assertNotNull(controller);");
+                p.println("assertThat(controller, is(notNullValue()));");
                 p.unindent();
             }
             p.println("}");
@@ -74,7 +75,7 @@ public class ControllerTestCaseGenerator implements Generator {
                     p.println("%1$s controller = new %1$s();",
                             controllerDesc.getSimpleName());
                     p.println(
-                            "assertEquals(\"%s/index\", controller.index());",
+                            "assertThat(controller.index(), is(\"%s/index\"));",
                             controllerDesc.getBasePath());
                     p.unindent();
                 }

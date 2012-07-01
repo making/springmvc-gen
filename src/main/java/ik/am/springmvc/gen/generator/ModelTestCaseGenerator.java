@@ -44,6 +44,7 @@ public class ModelTestCaseGenerator implements Generator {
 
         TEST.printImport(p);
         p.println("import static %s.*;", ClassConstants.Assert);
+        p.println("import static %s.*;", ClassConstants.CoreMatchers);
         p.println();
         GeneratedUtil.printGeneratedAnnotation(this, p);
         p.print("public class %s%s", modelDesc.getSimpleName(),
@@ -58,7 +59,7 @@ public class ModelTestCaseGenerator implements Generator {
             {
                 p.indent();
                 p.println("%1$s model = new %1$s();", modelDesc.getSimpleName());
-                p.println("assertNotNull(model);");
+                p.println("assertThat(model, is(notNullValue()));");
                 p.unindent();
             }
             p.println("}");

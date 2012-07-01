@@ -54,6 +54,7 @@ public class ServiceImplTestCaseGenerator implements Generator {
 
         TEST.printImport(p);
         p.println("import static %s.*;", ClassConstants.Assert);
+        p.println("import static %s.*;", ClassConstants.CoreMatchers);
         p.println();
         GeneratedUtil.printGeneratedAnnotation(this, p);
         p.print("public class %s%s", serviceImplDesc.getSimpleName(),
@@ -69,7 +70,7 @@ public class ServiceImplTestCaseGenerator implements Generator {
                 p.indent();
                 p.println("%1$s service = new %1$s();",
                         serviceImplDesc.getSimpleName());
-                p.println("assertNotNull(service);");
+                p.println("assertThat(service, is(notNullValue()));");
                 p.unindent();
             }
             p.println("}");

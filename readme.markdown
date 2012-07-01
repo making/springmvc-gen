@@ -31,5 +31,5 @@ after input form-name, generates `XxxOutput`, `XxxOutputTest` at the package fol
 if cannot run on MacOSX with Eclipse(SWT), re-run with JVM Option "-XstartOnFirstThread"
 
 
-  [1]: https://github.com/downloads/making/springmvc-gen/springmvc-gen-0.1.0.jar
+  [1]: https://github.com/downloads/making/springmvc-gen/springmvc-gen-0.2.0.jar
   [2]: https://github.com/downloads/making/springmvc-gen/build.xml
