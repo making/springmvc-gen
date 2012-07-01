@@ -1,0 +1,70 @@
+<project name="springmvc-blank" default="gen-controller" basedir=".">
+	<!-- if cannot run on MacOSX, re-run with "-XstartOnFirstThread" -->
+
+	<path id="classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- properties -->
+	<property name="srcDir" value="src/main/java" />
+	<property name="testDir" value="src/test/java" />
+	<property name="warDir" value="src/main/webapp" />
+	<property name="basePackageName" value="com.example.hello" />
+
+	<!-- taskdef -->
+	<taskdef name="gen-service" classname="ik.am.springmvc.gen.task.GenServiceTask" classpathref="classpath" />
+	<taskdef name="gen-service-impl" classname="ik.am.springmvc.gen.task.GenServiceImplTask" classpathref="classpath" />
+	<taskdef name="gen-controller" classname="ik.am.springmvc.gen.task.GenControllerTask" classpathref="classpath" />
+	<taskdef name="gen-html" classname="ik.am.springmvc.gen.task.GenHtmlTask" classpathref="classpath" />
+	<taskdef name="gen-model" classname="ik.am.springmvc.gen.task.GenModelTask" classpathref="classpath" />
+
+	<!-- input properties -->
+	<target name="input-base-package-name">
+		<input message="Input a base package name. (ex. com.example.hello)" addproperty="basePackageName" />
+	</target>
+
+	<target name="input-service-name">
+		<input message="Input a service name. (ex.  Foo -> ${basePackageName}.service.FooService, xxx.Foo -> ${basePackageName}.xxx.service.FooService)" addproperty="serviceDefinition" />
+	</target>
+
+	<target name="input-base-path">
+		<input message="Input a base path. (ex. foo -> ${basePackageName}.controller.FooController, xxx/foo -> ${basePackageName}.xxx.controller.FooController)" addproperty="basePath" />
+	</target>
+
+	<target name="input-form-model-name">
+		<input message="Input a form model name. (ex. Foo -> ${basePackageName}.model.form.FooForm, xxx.Foo -> ${basePackageName}.xxx.model.form.FooForm)" addproperty="modelDefinition" />
+	</target>
+
+	<target name="input-output-model-name">
+		<input message="Input a output model name. (ex. Foo -> ${basePackageName}.model.output.FooOutput, xxx.Foo -> ${basePackageName}.xxx.model.output.FooOutput)" addproperty="modelDefinition" />
+	</target>
+
+	<!-- generate sources -->
+	<target name="gen-controller" depends="input-base-package-name, input-base-path">
+		<gen-controller srcdir="${srcDir}" testdir="${testDir}" wardir="${warDir}" basePackageName="${basePackageName}" basePath="${basePath}" generateIndex="true" />
+		<gen-html wardir="${warDir}" basepath="${basePath}" title="Index" fileName="index.jsp" />
+	</target>
+
+	<target name="gen-controller-without-jsp" depends="input-base-package-name, input-base-path">
+		<gen-controller srcdir="${srcDir}" testdir="${testDir}" wardir="${warDir}" basePackageName="${basePackageName}" basePath="${basePath}" generateIndex="false" />
+	</target>
+
+	<target name="gen-service" depends="input-base-package-name, input-service-name">
+		<gen-service srcdir="${srcDir}" testdir="${testDir}" wardir="${warDir}" basePackageName="${basePackageName}" serviceDefinition="${serviceDefinition}" />
+		<gen-service-impl srcdir="${srcDir}" testdir="${testDir}" wardir="${warDir}" basePackageName="${basePackageName}" serviceDefinition="${serviceDefinition}" withoutInterface="false" />
+	</target>
+
+	<target name="gen-service-without-interface" depends="input-base-package-name, input-service-name">
+		<gen-service-impl srcdir="${srcDir}" testdir="${testDir}" wardir="${warDir}" basePackageName="${basePackageName}" serviceDefinition="${serviceDefinition}" withoutInterface="true" />
+	</target>
+
+	<target name="gen-form-model" depends="input-base-package-name, input-form-model-name">
+		<gen-model srcdir="${srcDir}" testdir="${testDir}" wardir="${warDir}" basePackageName="${basePackageName}" modelDefinition="${modelDefinition}" packageNameSuffix="form" classNameSuffix="Form" />
+	</target>
+
+	<target name="gen-output-model" depends="input-base-package-name, input-output-model-name">
+		<gen-model srcdir="${srcDir}" testdir="${testDir}" wardir="${warDir}" basePackageName="${basePackageName}" modelDefinition="${modelDefinition}" packageNameSuffix="output" classNameSuffix="Output" />
+	</target>
+</project>
