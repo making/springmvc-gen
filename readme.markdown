@@ -1,8 +1,11 @@
 ## How to use
 
- * lib/springmvc-gen-XXX.jar
- * build.xml (copy from dest/build.xml and edit properties)
+place these files to your project.
 
+ * [lib/springmvc-gen-XXX.jar][1]
+ * [build.xml][2] (edit properties)
+
+run
 
     $ ant gen-controller
 
@@ -23,3 +26,10 @@ after input form-name, generates `XxxForm`, `XxxFormTest` at the package followi
     $ ant gen-output-model
 
 after input form-name, generates `XxxOutput`, `XxxOutputTest` at the package following the rule
+
+----
+if cannot run on MacOSX with Eclipse(SWT), re-run with JVM Option "-XstartOnFirstThread"
+
+
+  [1]: https://github.com/downloads/making/springmvc-gen/springmvc-gen-0.0.1-SNAPSHOT.jar
+  [2]: https://github.com/downloads/making/springmvc-gen/build.xml
