@@ -55,7 +55,8 @@ public class ServiceImplGenerator extends ServiceGenerator {
         p.print("//");
         p.println(TRANSCATIONAL.toString());
         if (!serviceDesc.isWithoutInterface()) {
-            p.println(SERVICE.toString(serviceDesc.getSimpleName()));
+            p.println(SERVICE.toString(StringUtil.decapitalize(serviceDesc
+                    .getSimpleName())));
         } else {
             p.println("%s", SERVICE);
         }

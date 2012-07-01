@@ -93,7 +93,8 @@ public class GenModelTask extends AbstractGenJavaFileTask {
         if (!StringUtil.isEmpty(packageNameSuffix)) {
             nameBuilder.append(packageNameSuffix);
         }
-        nameBuilder.append(packages[packages.length - 1] + classNameSuffix);
+        nameBuilder.append(StringUtil.capitalize(packages[packages.length - 1])
+                + classNameSuffix);
 
         modelDesc.setPackageName(nameBuilder.getPackageName());
         modelDesc.setSimpleName(nameBuilder.getSimpleName());

@@ -28,6 +28,7 @@ import org.slim3.gen.generator.Generator;
 import org.slim3.gen.task.AbstractGenJavaFileTask;
 import org.slim3.gen.task.ClassNameBuilder;
 import org.slim3.gen.task.JavaFile;
+import org.slim3.gen.util.StringUtil;
 
 public class GenServiceTask extends AbstractGenJavaFileTask {
     /** the packageName */
@@ -92,7 +93,7 @@ public class GenServiceTask extends AbstractGenJavaFileTask {
             nameBuilder.append(packages[i]);
         }
         nameBuilder.append(Constants.SERVICE_PACKAGE);
-        nameBuilder.append(packages[packages.length - 1]
+        nameBuilder.append(StringUtil.capitalize(packages[packages.length - 1])
                 + Constants.SERVICE_SUFFIX);
 
         ServiceDesc serviceDesc = new ServiceDesc();
